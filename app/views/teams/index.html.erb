@@ -9,7 +9,8 @@
 </tr>
 </thead>
 <tbody>
-  <% @teams.each do |team| %>
+  <% @teams.all(order: "name").each do |team| %>
+    <% unless team.id == 269 %>
   <tr>
     <td> <%= team.name %> </td>
     <td> <%= team.conference %> </td>
@@ -23,6 +24,7 @@
           <%= link_to "Profile", new_team_profile_path(team) %>
         <% end %> </td>
     </tr>
+    <% end %>
   <% end %>
 </tbody>
 </table>

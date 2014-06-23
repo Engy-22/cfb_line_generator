@@ -16,3 +16,7 @@
 div.tablesorter-header-inner {
     text-decoration: underline;
 }
+
+.schedule {
+  border-spacing: 6px;
+}
