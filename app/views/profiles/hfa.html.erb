@@ -1,0 +1,23 @@
+<br/>
+<table id="HfaTable" class="tablesorter">
+<thead>
+<tr>
+  <th> Rank </th>
+  <th> Team </th>
+  <th> Conference </th>
+  <th> HFA </th>
+</tr>
+</thead>
+<tbody>
+<% Profile.user_profiles(current_user).all(:order => 'hfa desc').map.with_index do |profile, index| %>
+  <% if profile.user_id == current_user.id %>
+  <tr>
+  <td><%= index + 1 %> </td>
+  <td> <a href="<%=edit_team_profile_path(profile.team, profile)%>"> <%= profile.team.name %> </a> </td>
+  <td> <%= profile.team.conference %> </td>
+  <td class="rest-in-place" data-url="/teams/<%= profile.team_id %>/profiles/<%= profile.id %>" data-object="profile" data-attribute="hfa"> <%= profile.hfa %> </td>
+  </tr>
+  <% end %>
+<% end %>
+</tbody>
+</table>

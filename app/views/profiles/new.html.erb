@@ -1,0 +1,23 @@
+<br/>
+
+<h3> <%= @team.name %> </h3>
+<br/>
+
+<%= form_for [@team, @profile] do |f|  %>
+  <%= f.label :power_ranking, "Power Ranking" %>
+  <%= f.text_field :power_ranking %>
+  <br>
+  <%= f.label :hfa, "Home Field Adv" %>
+  <%= f.text_field :hfa %>
+  <br>
+  <%= f.label :offense %>
+  <%= f.text_area :offense %>
+  <br>
+  <%= f.label :defense %>
+  <%= f.text_area :defense %>
+  <br>
+  <%= f.label :notes %>
+  <%= f.text_area :notes %>
+  <br>
+  <%= f.submit %>
+<% end %>

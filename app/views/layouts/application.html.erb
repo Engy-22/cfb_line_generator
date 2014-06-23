@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cfb</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+ </head>
+<body>
+
+<nav>
+  <% if current_user %>
+  <%= link_to "Home", root_path %>
+  <%= link_to "Power Rankings", pr_path %>
+  <%= link_to "HFAs", hfa_path %>
+  <%= link_to "Schedule", games_path %>
+  <%= link_to "Sign Out", destroy_user_session_path %>
+<% else %>
+  <%= link_to "Sign In", new_user_session_path %> |
+<%= link_to "Sign Up", new_user_registration_path %> |
+<% end %>
+</nav>
+
+  <% if flash[:alert] %>
+    <div class="alert">
+      <%= alert %>
+    </div>
+  <% end %>
+
+  <% if flash[:notice] %>
+    <div class="notice">
+      <%= notice %>
+    </div>
+  <% end %>
+<%= yield %>
+
+</body>
+</html>
