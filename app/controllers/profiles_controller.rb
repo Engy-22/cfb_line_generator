@@ -19,7 +19,7 @@ def create
   @profile.user = current_user
   @profile.team_id = @team.id
   @profile.save
-  redirect_to edit_team_profile_path(@team, @profile)
+  redirect_to root_path
 end
 
 def edit
