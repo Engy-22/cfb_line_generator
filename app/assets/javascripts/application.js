@@ -18,9 +18,17 @@
 
 $(document).ready(function()
     {
-        $("#PrTable").tablesorter( {sortList: [[3,1], [1,0]]} );
-        $("#HfaTable").tablesorter( {sortList: [[3,1], [1,0]]} );
-        $("#TeamTable").tablesorter();
+        $("#PrTable").tablesorter({
+          sortList: [[3,1], [1,0]],
+          widgets: ['stickyHeaders']
+        });
+        $("#HfaTable").tablesorter(
+          {sortList: [[3,1], [1,0]],
+          widgets: ['stickyHeaders']
+          });
+        $("#TeamTable").tablesorter({widgets: ['stickyHeaders']});
         $("#GameTable").tablesorter( {sortList: [[0,0], [1,0]]} );
+        $("#ScheduleTable").tablesorter();
+
     }
 );
