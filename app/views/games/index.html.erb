@@ -15,7 +15,7 @@
 <tbody>
 <% @games.each do |game| %>
 <tr>
-<td> <br/> <%= game.date %> </td>
+<td> <br/> <%= game.date.strftime("%a, %B %d") %> </td>
 <td>
 <% unless game.visitor_rot == nil %>
   <%= game.visitor_rot %> <br/>
