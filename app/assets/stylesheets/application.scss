@@ -17,6 +17,14 @@ div.tablesorter-header-inner {
     text-decoration: underline;
 }
 
+table {
+  td {padding: 2px 20px 2px 20px;}
+}
+
 .schedule, .tablesorter {
   border-spacing: 6px;
+}
+
+th.tablesorter-header.tablesorter-headerDesc {
+width: 150px;
 }
