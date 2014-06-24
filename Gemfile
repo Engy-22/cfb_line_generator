@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'rest_in_place'
 gem 'jquery-tablesorter'
+gem 'kaminari'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
