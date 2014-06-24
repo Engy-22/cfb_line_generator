@@ -5,21 +5,7 @@ def pr
 end
 
 def hfa
-  @profiles = Profile.all.order('hfa desc')
-end
-
-def new
-  @team = Team.find(params[:team_id])
-  @profile = Profile.new
-end
-
-def create
-  @team = Team.find(params[:team_id])
-  @profile = Profile.new(profile_params)
-  @profile.user = current_user
-  @profile.team_id = @team.id
-  @profile.save
-  redirect_to root_path
+  @profiles = Profile.all.order('hfa DESC, power_ranking DESC')
 end
 
 def edit

@@ -8,8 +8,9 @@ class Game < ActiveRecord::Base
   end
 
   def has_profile?(user)
-    profiles.where(user_id: user.id).any?
+   profiles.where("user_id = ? AND power_ranking > 0", user.id).any?
   end
+
 
   require 'csv'
 
