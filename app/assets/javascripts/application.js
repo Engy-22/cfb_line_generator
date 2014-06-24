@@ -19,14 +19,12 @@
 $(document).ready(function()
     {
         $("#PrTable").tablesorter({
-          sortList: [[3,1], [1,0]],
-          widgets: ['stickyHeaders']
+          sortList: [[3,1], [1,0]]
         });
         $("#HfaTable").tablesorter(
-          {sortList: [[3,1], [1,0]],
-          widgets: ['stickyHeaders']
+          {sortList: [[3,1], [1,0]]
           });
-        $("#TeamTable").tablesorter({widgets: ['stickyHeaders']});
+        $("#TeamTable").tablesorter();
         $("#GameTable").tablesorter( {sortList: [[0,0], [1,0]]} );
         $("#ScheduleTable").tablesorter();
 

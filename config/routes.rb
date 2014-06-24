@@ -6,8 +6,7 @@ Cfb::Application.routes.draw do
   resources :games
   resources :spreads, :only => [:create, :update]
   get "/pr", to: "profiles#pr"
-  patch "/pr", to: "profile#pr_update"
   get "/hfa", to: "profiles#hfa"
-  put "/hfa", to: "profile#hfa_update"
+  get "/about", to: "teams#about"
   root to: "teams#index"
 end
