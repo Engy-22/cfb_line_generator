@@ -14,14 +14,10 @@
   <tr>
     <td> <%= team.name %> </td>
     <td> <%= team.conference %> </td>
-    <td> <% if team.has_profile?(current_user) %>
-          <% team.profiles.each do |profile| %>
+    <td> <% team.profiles.each do |profile| %>
             <% if profile.user_id == current_user.id %>
               <%= link_to "Profile", edit_team_profile_path(profile.team, profile) %>
             <% end %>
-          <% end %>
-        <% else %>
-          <%= link_to "Profile", new_team_profile_path(team) %>
         <% end %> </td>
     </tr>
     <% end %>
