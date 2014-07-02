@@ -3,7 +3,9 @@ class SpreadsController < ApplicationController
 def create
     @spread = Spread.new(spread_params)
     @spread.user = current_user
-    get_win_percentage
+    if @spread.proj_spread != nil
+      get_win_percentage
+    end
     @spread.save
     redirect_to :back
 end
