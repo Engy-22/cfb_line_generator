@@ -11,6 +11,7 @@ end
 def edit
   @team = Team.find(params[:team_id])
   @profile = Profile.find(params[:id])
+  @counter = 0
 end
 
 def update

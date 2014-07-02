@@ -107,7 +107,9 @@
 <td></td>
 <td>
   <% if game.has_spread?(current_user) %>
+    <br/>
     <%= game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
+    <% @counter += game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
   <% end %>
   </td>
 </tr>
@@ -181,7 +183,9 @@
 <td></td>
 <td>
 <% if game.has_spread?(current_user) %>
+    <br/>
     <%= game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
+    <% @counter += game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
   <% end %>
 </td>
 </tr>
@@ -189,5 +193,5 @@
 </tbody>
 </table>
 
-Season Wins:
+<strong> Season Wins: <%= @counter %> </strong>
 
