@@ -63,11 +63,7 @@
 <td>
 </br>
 <% if game.visitor.has_profile?(current_user) and game.home.has_profile?(current_user) %>
-  <% if game.neutral == true %>
-    <%= game.visitor.profiles.find_by(user_id: current_user.id).power_ranking - game.home.profiles.find_by(user_id: current_user.id).power_ranking %>
-  <% else %>
-    <%= game.visitor.profiles.find_by(user_id: current_user.id).power_ranking - game.home.profiles.find_by(user_id: current_user.id).power_ranking - game.home.profiles.find_by(user_id: current_user.id).hfa %>
-  <% end %>
+  get_spread
 <% end %>
 </td>
 <% if game.has_spread?(current_user) %>
@@ -139,11 +135,7 @@
 <td>
 </br>
 <% if game.visitor.has_profile?(current_user) and game.home.has_profile?(current_user) %>
-  <% if game.neutral == true %>
-    <%= game.visitor.profiles.find_by(user_id: current_user.id).power_ranking - game.home.profiles.find_by(user_id: current_user.id).power_ranking %>
-  <% else %>
-    <%= game.visitor.profiles.find_by(user_id: current_user.id).power_ranking - game.home.profiles.find_by(user_id: current_user.id).power_ranking - game.home.profiles.find_by(user_id: current_user.id).hfa %>
-  <% end %>
+  get_spread
 <% end %>
 </td>
 <% if game.has_spread?(current_user) %>
