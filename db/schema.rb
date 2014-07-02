@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140623130450) do
+ActiveRecord::Schema.define(version: 20140701131503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(version: 20140623130450) do
 
   create_table "spreads", force: true do |t|
     t.integer  "game_id"
-    t.float    "pr_spread"
     t.integer  "user_id"
     t.float    "proj_spread"
     t.float    "proj_total"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "home_win_percentage"
   end
 
   create_table "teams", force: true do |t|
