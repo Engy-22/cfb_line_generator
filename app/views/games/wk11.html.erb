@@ -1,0 +1,108 @@
+<br/>
+Week
+<%= link_to "1", wk1_path %> |
+<%= link_to "2", wk2_path %> |
+<%= link_to "3", wk3_path %> |
+<%= link_to "4", wk4_path %> |
+<%= link_to "5", wk5_path %> |
+<%= link_to "6", wk6_path %> |
+<%= link_to "7", wk7_path %> |
+<%= link_to "8", wk8_path %> |
+<%= link_to "9", wk9_path %> |
+<%= link_to "10", wk10_path %> |
+11 |
+<%= link_to "12", wk12_path %> |
+<%= link_to "13", wk13_path %> |
+<%= link_to "14", wk14_path %> |
+<%= link_to "15", wk15_path %>
+<br/>
+<br/>
+<table id="ScheduleTable" class="tablesorter">
+<thead>
+<tr>
+  <th class="{sorter: false}"> Date </th>
+  <th class="{sorter: false}"> Rot # </th>
+  <th class="{sorter: false}"> Teams </th>
+  <th class="{sorter: false}"> Neutral? </th>
+  <th class="{sorter: false}"> PRs </th>
+  <th class="{sorter: false}"> PR Spread </th>
+  <th class="{sorter: false}"> My Spread </th>
+  <th class="{sorter: false}"> My Total </th>
+</tr>
+</thead>
+<tbody>
+<% @games.each do |game| %>
+<tr>
+<td> <br/> <%= game.date.strftime("%a, %B %d") %> </td>
+<td>
+<% unless game.visitor_rot == nil %>
+  <%= game.visitor_rot %> <br/>
+  <%= game.home_rot %>
+<% end %>
+</td>
+<td>
+  <% if game.visitor.name == "FCS Team" %>
+    <%= game.visitor.name %>
+  <% else %>
+    <a href="/teams/<%= game.visitor.id %>/profiles/<%= game.visitor.profiles.find_by(user_id: current_user.id).id %>/edit"> <%= game.visitor.name %> </a>
+  <% end %> <br/>
+  <% if game.home.name == "FCS Team" %>
+   <%= game.home.name %>
+  <% else %>
+    <a href="/teams/<%= game.home.id %>/profiles/<%= game.home.profiles.find_by(user_id: current_user.id).id %>/edit"> <%= game.home.name %> </a>
+  <% end %>
+</td>
+<td> <br/> <% if game.neutral == true %> x
+     <% end %>
+</td>
+<td>
+<% if game.visitor.has_profile?(current_user) and game.home.has_profile?(current_user) %>
+  <%= game.visitor.profiles.find_by(user_id: current_user.id).power_ranking %> <br/>
+  <%= game.home.profiles.find_by(user_id: current_user.id).power_ranking %>
+<% end %>
+</td>
+<td>
+</br>
+<% if game.visitor.has_profile?(current_user) and game.home.has_profile?(current_user) %>
+  get_spread
+<% end %>
+</td>
+<% if game.has_spread?(current_user) %>
+<td>
+  <br/>
+ <span class="rest-in-place" data-url="/spreads/<%= game.spreads.find_by(user_id: current_user.id).id %>" data-object="spread" data-attribute="proj_spread">
+ <% unless game.spreads.find_by(user_id: current_user.id).proj_spread == nil %>
+  <%= game.spreads.find_by(user_id: current_user.id).proj_spread %>
+ <% else %>
+  N/A
+ <% end %> </span>
+</td>
+<td>
+  <br/>
+<span class="rest-in-place" data-url="/spreads/<%= game.spreads.find_by(user_id: current_user.id).id %>" data-object="spread" data-attribute="proj_total">
+<% unless game.spreads.find_by(user_id: current_user.id).proj_total == nil %>
+  <%= game.spreads.find_by(user_id: current_user.id).proj_total %>
+<% else %>
+  N/A
+<% end %> </span>
+</td>
+<% else %>
+<td>
+  <%= form_for game.spreads.build do |f| %>
+    <%= f.text_field :proj_spread %>
+</td>
+<td>
+    <%= f.text_field :proj_total %>
+</td>
+<td>
+    <%= f.hidden_field :game_id, value: game.id %>
+    <%= f.submit "Update" %>
+</td>
+  <% end %>
+<% end %>
+</tr>
+<% end %>
+</tbody>
+</table>
+
+
