@@ -63,7 +63,7 @@
 <td>
 </br>
 <% if game.visitor.has_profile?(current_user) and game.home.has_profile?(current_user) %>
-  <%= get_spread %>
+  <%= get_spread(game) %>
 <% end %>
 </td>
 <% if game.has_spread?(current_user) %>
@@ -137,7 +137,7 @@
 <td>
 </br>
 <% if game.visitor.has_profile?(current_user) and game.home.has_profile?(current_user) %>
-  <%= get_spread %>
+  <%= get_spread(game) %>
 <% end %>
 </td>
 <% if game.has_spread?(current_user) %>
