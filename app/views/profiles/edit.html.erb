@@ -105,8 +105,8 @@
   <% if game.has_spread?(current_user) %>
     <br/>
     <% unless game.spreads.find_by(user_id: current_user.id).proj_spread == nil %>
-      <%= game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
-      <% @counter += game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
+      <%= 1 - game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
+       <% @counter += 1 - game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
     <% end %>
   <% end %>
   </td>
@@ -180,7 +180,7 @@
     <br/>
     <% unless game.spreads.find_by(user_id: current_user.id).proj_spread == nil %>
       <%= game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
-      <% @counter += game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
+        <% @counter += game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
     <% end %>
   <% end %>
 </td>
