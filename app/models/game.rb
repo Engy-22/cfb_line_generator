@@ -17,17 +17,17 @@ class Game < ActiveRecord::Base
   def self.import()
     CSV.foreach('cfbschedule.csv') do |row|
       record = Game.new(
-        :visitor_id => row[0],
-        :home_id => row[1],
-        :visitor_rot => row[2],
-        :home_rot => row[3],
-        :neutral => row[4],
-        :visitor_score => row[5],
-        :home_score => row[6],
-        :closing_spread => row[7],
-        :date => row[8],
-        :created_at => row[9],
-        :updated_at => row[10]
+        visitor_id: row[0],
+        home_id: row[1],
+        visitor_rot: row[2],
+        home_rot: row[3],
+        neutral: row[4],
+        visitor_score: row[5],
+        home_score: row[6],
+        closing_spread: row[7],
+        date: row[8],
+        created_at: row[9],
+        updated_at: row[10]
       )
     record.save!
     end
