@@ -9,5 +9,6 @@ Cfb::Application.routes.draw do
   get "/pr", to: "profiles#pr"
   get "/hfa", to: "profiles#hfa"
   get "/about", to: "teams#about"
+  get "/win_totals", to: "spreads#win_totals"
   root to: "teams#index"
 end

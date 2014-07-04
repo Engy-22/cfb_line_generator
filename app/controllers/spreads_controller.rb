@@ -13,7 +13,6 @@ end
 def update
   @spread = Spread.find(params[:id])
   if @spread.update_attributes!(spread_params)
-
     respond_to do |format|
       format.html
       format.json {render :json => @spread}
@@ -21,6 +20,12 @@ def update
   get_win_percentage
   @spread.save
   end
+end
+
+def win_totals
+  @teams = Team.all
+  @spreads = Spread.all.where(user_id: current_user.id)
+  @counter = 0
 end
 
 private

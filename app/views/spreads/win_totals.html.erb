@@ -1,0 +1,32 @@
+<br/>
+<table>
+<thead>
+<tr>
+  <th> Team </th>
+  <th> Conference </th>
+  <th> Season Win Totals </th>
+</tr>
+</thead>
+<tbody>
+<% @teams.order('name').each do |team| %>
+  <tr>
+  <td> <%= team.name %> </a> </td>
+  <td> <%= team.conference %> </td>
+  <td> <% team.games_as_visitor.each do |game| %>
+          <% game.spreads.where(user_id: current_user.id).each do |spread| %>
+            <% @counter += 1 - spread.home_win_percentage %>
+          <% end %>
+       <% end %>
+       <% team.games_as_home.each do |game| %>
+          <% game.spreads.where(user_id: current_user.id).each do |spread| %>
+            <% @counter += spread.home_win_percentage %>
+          <% end %>
+       <% end %>
+       <%= number_with_precision(@counter, :precision => 2)  %>
+       <% @counter = 0 %>
+
+<% end %>
+  </td>
+  </tr>
+</tbody>
+</table>
