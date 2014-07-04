@@ -9,6 +9,7 @@
 </thead>
 <tbody>
 <% @teams.order('name').each do |team| %>
+<% unless team.name == "West Virginia" %>
   <tr>
   <td> <%= team.name %> </a> </td>
   <td> <%= team.conference %> </td>
@@ -24,7 +25,7 @@
        <% end %>
        <%= number_with_precision(@counter, :precision => 2)  %>
        <% @counter = 0 %>
-
+<% end %>
 <% end %>
   </td>
   </tr>
