@@ -9,7 +9,6 @@
 </thead>
 <tbody>
 <% @teams.order('name').each do |team| %>
-<% unless team.name == "West Virginia" %>
   <tr>
   <td> <%= team.name %> </a> </td>
   <td> <%= team.conference %> </td>
@@ -17,6 +16,7 @@
           <% game.spreads.where(user_id: current_user.id).each do |spread| %>
             <% unless spread.home_win_percentage == nil %>
               <% @counter += 1 - spread.home_win_percentage %>
+              <%= 1 - spread.home_win_percentage %>
             <% end %>
           <% end %>
        <% end %>
@@ -24,12 +24,12 @@
           <% game.spreads.where(user_id: current_user.id).each do |spread| %>
             <% unless spread.home_win_percentage == nil %>
               <% @counter += spread.home_win_percentage %>
+              <%= spread.home_win_percentage %>
             <% end %>
           <% end %>
        <% end %>
        <%= number_with_precision(@counter, :precision => 2)  %>
        <% @counter = 0 %>
-<% end %>
 <% end %>
   </td>
   </tr>
