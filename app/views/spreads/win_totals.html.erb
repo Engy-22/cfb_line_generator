@@ -15,12 +15,16 @@
   <td> <%= team.conference %> </td>
   <td> <% team.games_as_visitor.each do |game| %>
           <% game.spreads.where(user_id: current_user.id).each do |spread| %>
-            <% @counter += 1 - spread.home_win_percentage %>
+            <% unless spread.home_win_percentage == nil %>
+              <% @counter += 1 - spread.home_win_percentage %>
+            <% end %>
           <% end %>
        <% end %>
        <% team.games_as_home.each do |game| %>
           <% game.spreads.where(user_id: current_user.id).each do |spread| %>
-            <% @counter += spread.home_win_percentage %>
+            <% unless spread.home_win_percentage == nil %>
+              <% @counter += spread.home_win_percentage %>
+            <% end %>
           <% end %>
        <% end %>
        <%= number_with_precision(@counter, :precision => 2)  %>
