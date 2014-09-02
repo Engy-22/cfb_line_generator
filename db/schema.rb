@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140701131503) do
+ActiveRecord::Schema.define(version: 20140901225018) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,28 @@ ActiveRecord::Schema.define(version: 20140701131503) do
     t.integer  "home_score"
     t.float    "closing_spread"
     t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "historicals", force: true do |t|
+    t.integer  "year"
+    t.string   "home_team"
+    t.string   "away_team"
+    t.float    "spread"
+    t.float    "total"
+    t.integer  "h1q"
+    t.integer  "h2q"
+    t.integer  "h3q"
+    t.integer  "h4q"
+    t.integer  "hot"
+    t.integer  "hscore"
+    t.integer  "a1q"
+    t.integer  "a2q"
+    t.integer  "a3q"
+    t.integer  "a4q"
+    t.integer  "aot"
+    t.integer  "ascore"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,25 @@
+<table>
+  <thead>
+    <tr>
+      <th>Spread</th>
+      <th># of Games</th>
+      <th>Win Percentage</th>
+      <th> ML </th>
+    </tr>
+  </thead>
+<tbody>
+  <% (-42..42).step(0.5) do |spread| %>
+  <tr>
+  <td> <%= spread %> </td>
+  <td> <%= @historicals.where(spread: spread).count %> </td>
+  <td> <%= Historical.win_percentage(spread) %> </td>
+  <td> <% if @historicals.where(spread: spread).count > 0 %>
+        <%= Historical.moneyline(Historical.win_percentage(spread)) %>
+       <% else %>
+        can't display
+       <% end %> </td>
+
+  </tr>
+<% end %>
+</tbody>
+</table>
