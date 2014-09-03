@@ -1,3 +1,13 @@
+<br/>
+<form name="Converter">
+Spread
+<input type="number" name="INPUT" id="INPUT">
+<a href="#" class="calculate">Calculate</a>
+<br/>
+Moneyline
+<input type="text" name="OUTPUT" id="OUTPUT">
+</form>
+
 <table>
   <thead>
     <tr>
@@ -8,18 +18,19 @@
     </tr>
   </thead>
 <tbody>
-  <% (-42..42).step(0.5) do |spread| %>
+  <% (-42..-1).step(0.5) do |spread| %>
   <tr>
   <td> <%= spread %> </td>
-  <td> <%= @historicals.where(spread: spread).count %> </td>
+  <td> <%= @historicals.where(spread: spread).count + @historicals.where(spread: spread*-1).count %> </td>
   <td> <%= Historical.win_percentage(spread) %> </td>
   <td> <% if @historicals.where(spread: spread).count > 0 %>
         <%= Historical.moneyline(Historical.win_percentage(spread)) %>
        <% else %>
-        can't display
+        Can't Display
        <% end %> </td>
-
   </tr>
 <% end %>
 </tbody>
 </table>
+
+

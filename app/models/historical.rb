@@ -29,8 +29,11 @@ require 'csv'
   end
 
   def self.win_percentage(spread)
-    games_w_spread = Historical.where(spread: spread)
-    win = games_w_spread.where("hscore > ascore").count / games_w_spread.count.to_f
+    home_fav = Historical.where(spread: spread)
+    away_fav = Historical.where(spread: spread * -1)
+    home_wins = home_fav.where("hscore > ascore").count
+    away_wins = away_fav.where("ascore > hscore").count
+    win = (home_wins + away_wins) / (home_fav.count.to_f + away_fav.count.to_f)
     if win.class == Float
       win.round(3)
     else
@@ -56,6 +59,25 @@ require 'csv'
   def self.check_total(total, line)
     games_w_total = Historical.where(total: total)
     games_w_total.where("hscore + ascore > ?", line).count / games_w_total.count.to_f
+  end
+
+  def self.spread_to_ml(spread)
+    a = -2.0528710078450474E-01
+    b = -1.3042085394173281E+01
+    c = 2.4014104679738363E-01
+    d = -7.9686927880022185E-03
+    if spread == 0
+      Historical.moneyline(0.5)
+    elsif spread < 0
+      temp = 1.0 / (1.0 + Math.exp(-1.0 * a * (spread - b))) ** c
+      temp += d
+      Historical.moneyline(temp)
+    else
+      spread = spread * -1
+      temp = 1.0 / (1.0 + Math.exp(-1.0 * a * (spread - b))) ** c
+      temp += d
+      Historical.moneyline(1 - temp)
+    end
   end
 
 end
