@@ -29,25 +29,35 @@ require 'csv'
   end
 
   def self.win_percentage(spread)
+    games = Historical.where(spread: spread)
+    wins = games.where("hscore > ascore").count / games.count.to_f
+    if wins.class == Float
+      wins.round(3)
+    else
+      wins
+    end
+  end
+
+  def self.combine_home_and_away(spread)
     home_fav = Historical.where(spread: spread)
     away_fav = Historical.where(spread: spread * -1)
     home_wins = home_fav.where("hscore > ascore").count
     away_wins = away_fav.where("ascore > hscore").count
-    win = (home_wins + away_wins) / (home_fav.count.to_f + away_fav.count.to_f)
-    if win.class == Float
-      win.round(3)
+    wins = (home_wins + away_wins) / (home_fav.count.to_f + away_fav.count.to_f)
+    if wins.class == Float
+      wins.round(3)
     else
-      win
+      wins
     end
   end
 
   def self.moneyline(win_percentage)
     if win_percentage == 1.0 or win_percentage == 0
-      "can't display"
+      "Can't display"
     elsif win_percentage >= 0.5
       (-100 * win_percentage / (1 - win_percentage)).round(0)
     else
-      ((100 - 100 * win_percentage) / win_percentage).round(0)
+      "+" + ((100 - 100 * win_percentage) / win_percentage).round(0).to_s
     end
   end
 
@@ -67,16 +77,16 @@ require 'csv'
     c = 2.4014104679738363E-01
     d = -7.9686927880022185E-03
     if spread == 0
-      Historical.moneyline(0.5)
+      0.5
     elsif spread < 0
       temp = 1.0 / (1.0 + Math.exp(-1.0 * a * (spread - b))) ** c
       temp += d
-      Historical.moneyline(temp)
+      temp.round(3)
     else
       spread = spread * -1
       temp = 1.0 / (1.0 + Math.exp(-1.0 * a * (spread - b))) ** c
       temp += d
-      Historical.moneyline(1 - temp)
+      1 - temp.round(3)
     end
   end
 
