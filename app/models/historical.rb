@@ -83,10 +83,10 @@ require 'csv'
       temp += d
       temp.round(3)
     else
-      spread = spread * -1
+      spread = spread * -1.0
       temp = 1.0 / (1.0 + Math.exp(-1.0 * a * (spread - b))) ** c
       temp += d
-      1 - temp.round(3)
+      (1 - temp).round(3)
     end
   end
 
