@@ -6,8 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :profiles, :dependent => :destroy
   has_many :spreads, :dependent => :destroy
+  accepts_nested_attributes_for :spreads, :reject_if => lambda { |b| b[:proj_spread].blank? }
 
-  after_create :create_profiles
+  after_create :create_profiles, :create_spreads
 
   private
 
@@ -17,6 +18,13 @@ class User < ActiveRecord::Base
       unless team.name == "FCS Team"
         Profile.create(user_id: self.id, team_id: team.id, hfa: 0, power_ranking: 0)
       end
+    end
+  end
+
+  def create_spreads
+    @games = Game.all
+    @games.each do |game|
+      Spread.create(user_id: self.id, game_id: game.id)
     end
   end
 

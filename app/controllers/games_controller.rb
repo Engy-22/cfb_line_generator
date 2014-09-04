@@ -26,6 +26,7 @@ class GamesController < ApplicationController
   end
 
   def render_games_for_week(week_number)
+
     range = date_range_for_week(week_number)
     @games = Game.where(:date => range).order('date').order('visitor_rot')
     respond_to do |format|
@@ -34,8 +35,3 @@ class GamesController < ApplicationController
     end
   end
 end
-
-#@results = @games.map do |game|
-     # thing = BusinessLogicThing.new(current_user, game.home, game.visitor)
-      #thing.calculate_result
-    #end

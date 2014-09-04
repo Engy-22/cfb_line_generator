@@ -1,7 +1,8 @@
 class Game < ActiveRecord::Base
   belongs_to :visitor, class_name: "Team"
   belongs_to :home, class_name: "Team"
-  has_many :spreads
+  has_many :spreads, :dependent => :destroy
+
 
   def has_spread?(user)
     spreads.where(user_id: user.id).any?
@@ -11,6 +12,7 @@ class Game < ActiveRecord::Base
    profiles.where("user_id = ? AND power_ranking > 0", user.id).any?
   end
 
+  private
 
   require 'csv'
 
@@ -30,6 +32,18 @@ class Game < ActiveRecord::Base
         updated_at: row[10]
       )
     record.save!
+    end
+  end
+
+  def self.create_spreads
+    @users = User.all
+    @users.each do |user|
+      @games = Game.all
+      @games.each do |game|
+        unless Spread.where(game_id: game.id, user_id: user.id).any?
+          Spread.create(game_id: game.id, user_id: user.id)
+        end
+      end
     end
   end
 

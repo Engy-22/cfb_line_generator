@@ -51,6 +51,36 @@ require 'csv'
     end
   end
 
+  def self.check_spread(spread, line)
+    games_w_spread = Historical.where(spread: spread)
+    games_w_spread.where("hscore + spread + ? > ascore", line).count / games_w_spread.count.to_f
+  end
+
+  def self.check_total(total, line)
+    games_w_total = Historical.where(total: total)
+    games_w_total.where("hscore + ascore > ?", line).count / games_w_total.count.to_f
+  end
+
+  def self.check_1hspread(spread, fhline)
+    games_w_spread = Historical.where(spread: spread)
+    games_w_spread.where("h1q + h2q + ? > a1q + a2q", fhline).count / games_w_spread.count.to_f
+  end
+
+  def self.check_1htotal(total, fhline)
+    games_w_total = Historical.where(total: total)
+    games_w_total.where("h1q + h2q + a1q + a2q > ?", fhline).count / games_w_total.count.to_f
+  end
+
+  def self.check_1qspread(spread, fqline)
+    games_w_spread = Historical.where(spread: spread)
+    games_w_spread.where("h1q + ? > a1q", fqline).count / games_w_spread.count.to_f
+  end
+
+  def self.check_1qtotal(total, fqline)
+    games_w_total = Historical.where(total: total)
+    games_w_total.where("h1q + a1q > ?", fqline).count / games_w_total.count.to_f
+  end
+
   def self.moneyline(win_percentage)
     if win_percentage == 1.0 or win_percentage == 0
       "Can't display"
@@ -59,16 +89,6 @@ require 'csv'
     else
       "+" + ((100 - 100 * win_percentage) / win_percentage).round(0).to_s
     end
-  end
-
-  def self.check_spread(spread)
-    games_w_spread = Historical.where(spread: spread)
-    games_w_spread.where("hscore + spread > ascore").count / games_w_spread.count.to_f
-  end
-
-  def self.check_total(total, line)
-    games_w_total = Historical.where(total: total)
-    games_w_total.where("hscore + ascore > ?", line).count / games_w_total.count.to_f
   end
 
   def self.spread_to_ml(spread)
