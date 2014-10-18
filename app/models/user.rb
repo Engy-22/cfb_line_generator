@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :profiles, :dependent => :destroy
-  has_many :spreads, :dependent => :destroy
+  has_many :profiles, dependent: :destroy
+  has_many :spreads, dependent: :destroy
   accepts_nested_attributes_for :spreads, :reject_if => lambda { |b| b[:proj_spread].blank? }
 
   after_create :create_profiles, :create_spreads
