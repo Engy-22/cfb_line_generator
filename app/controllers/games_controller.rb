@@ -18,6 +18,9 @@ class GamesController < ApplicationController
     elsif week_number == 15
       start_date = Date.new(2014, 12, 2)
       end_date = Date.new(2014, 12, 14)
+    elsif week_number == 16
+      start_date = Date.new(2014,12, 15)
+      end_date = Date.new(2015, 1, 15)
     else
       start_date = Date.new(2014, 9, 2) + (week_number - 2).weeks
       end_date = start_date + 1.week
