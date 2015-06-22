@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: games
+#
+#  id             :integer          not null, primary key
+#  visitor_id     :integer
+#  home_id        :integer
+#  visitor_rot    :integer
+#  home_rot       :integer
+#  neutral        :boolean          default(FALSE)
+#  visitor_score  :integer
+#  home_score     :integer
+#  closing_spread :float
+#  date           :date
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Game < ActiveRecord::Base
   belongs_to :visitor, class_name: "Team"
   belongs_to :home, class_name: "Team"

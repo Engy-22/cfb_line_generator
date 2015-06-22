@@ -20,3 +20,16 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+group :development, :test do
+  gem "annotate", "~> 2.6.10"
+  gem "dotenv-rails"
+  gem "quiet_assets", "~> 1.1"
+  gem "pry-rails"
+  gem "better_errors", "~> 2.1"
+  gem "binding_of_caller"
+  gem "rspec-rails"
+  gem "capybara"
+  gem "factory_girl"
+  gem "database_cleaner"
+  gem "launchy"
+end

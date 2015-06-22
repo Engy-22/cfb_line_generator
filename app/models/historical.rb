@@ -1,3 +1,29 @@
+# == Schema Information
+#
+# Table name: historicals
+#
+#  id         :integer          not null, primary key
+#  year       :integer
+#  home_team  :string(255)
+#  away_team  :string(255)
+#  spread     :float
+#  total      :float
+#  h1q        :integer
+#  h2q        :integer
+#  h3q        :integer
+#  h4q        :integer
+#  hot        :integer
+#  hscore     :integer
+#  a1q        :integer
+#  a2q        :integer
+#  a3q        :integer
+#  a4q        :integer
+#  aot        :integer
+#  ascore     :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Historical < ActiveRecord::Base
 
   require 'csv'
