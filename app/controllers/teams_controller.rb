@@ -1,11 +1,12 @@
 class TeamsController < ApplicationController
 
-def index
-  @teams = Team.all
-end
+  def index
+    @teams = Team.all
+  end
 
-def about
-end
+  def about
+    render
+  end
 
 
 end
