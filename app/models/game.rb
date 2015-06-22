@@ -21,6 +21,30 @@ class Game < ActiveRecord::Base
   belongs_to :home, class_name: "Team"
   has_many :spreads, dependent: :destroy
 
+  def self.import_schedule
+    agent = Mechanize.new
+    stuff = agent.get("http://www.lsufootball.net/tvschedule.htm").search(".tabdata")
+    data = stuff.map do |node|
+      node.children.map{|n| [n.text.strip] if n.elem? }.compact
+    end
+    manual = []
+    day = ""
+    data = data[0]
+    (4..950).each do |n|
+      if data[n][0].split(",")[0] == "Saturday" || data[n][0].split(",")[0] == "Sunday" || data[n][0].split(",")[0] == "Monday" || data[n][0].split(",")[0] == "Tuesday" || data[n][0].split(",")[0] == "Wednesday" || data[n][0].split(",")[0] == "Thursday" || data[n][0].split(",")[0] == "Friday"
+        day = data[n][0]
+      elsif data[n][0].include? "game"
+      elsif data[n][0].include? " vs. "
+        Game.create(visitor_id: Team.where(name: data[n][0].split(" vs. ")[0]).first_or_create.id, home_id: Team.where(name: data[n][0].split(" vs. ")[1].split(" (")[0]).first_or_create.id, date: day.to_date, neutral: true)
+      elsif data[n][0].include? " at "
+        Game.create(visitor_id: Team.where(name: data[n][0].split(" at ")[0]).first_or_create.id, home_id: Team.where(name: data[n][0].split(" at ")[1].split("\n")[0]).first_or_create.id, date: day.to_date)
+      else
+        manual << data[n][0]
+      end
+    end
+    manual
+  end
+
   def has_spread?(user)
     spreads.where(user_id: user.id).any?
   end

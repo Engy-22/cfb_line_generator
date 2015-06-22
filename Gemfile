@@ -14,6 +14,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'thin'
 gem 'mechanize'
+gem "activeadmin", github: "activeadmin"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

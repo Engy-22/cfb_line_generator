@@ -30,4 +30,8 @@ class Team < ActiveRecord::Base
    profiles.where("user_id = ? AND power_ranking > 0", user.id).any?
   end
 
+  def games
+    (games_as_visitor + games_as_home).sort_by &:date
+  end
+
 end
