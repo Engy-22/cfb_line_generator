@@ -1,6 +1,6 @@
 class Historical < ActiveRecord::Base
 
-require 'csv'
+  require 'csv'
 
   def self.import(file)
     games = CSV.read(file)

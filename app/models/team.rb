@@ -3,7 +3,6 @@ class Team < ActiveRecord::Base
   has_many :games_as_visitor, class_name: "Game", foreign_key: "visitor_id"
   has_many :games_as_home, class_name: "Game", foreign_key: "home_id"
 
-
   require 'csv'
 
   def self.import()
