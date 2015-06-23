@@ -17,12 +17,16 @@ class Team < ActiveRecord::Base
   require 'csv'
 
   def self.import()
-    CSV.foreach('cfbteams.csv') do |row|
-      record = Team.new(
-        :name => row[0],
-        :conference => row[1]
-      )
-    record.save!
+    agent = Mechanize.new
+    stuff = agent.get("https://en.wikipedia.org/wiki/List_of_NCAA_Division_I_FBS_football_programs").search(".wikitable")
+    data = stuff.map do |node|
+      node.children.map{|n| [n.text.strip] if n.elem? }.compact
+    end
+    data = data[0]
+    data.each do |x|
+      unless x[0].split("\n")[0] == "Team"
+        Team.create(name: x[0].split("\n")[0], conference: x[0].split("\n")[4])
+      end
     end
   end
 
