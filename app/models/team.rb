@@ -16,7 +16,7 @@ class Team < ActiveRecord::Base
 
   require 'csv'
 
-  def self.import()
+  def self.import
     agent = Mechanize.new
     stuff = agent.get("https://en.wikipedia.org/wiki/List_of_NCAA_Division_I_FBS_football_programs").search(".wikitable")
     data = stuff.map do |node|
