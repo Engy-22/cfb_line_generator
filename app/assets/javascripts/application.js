@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require 'rest_in_place'
 //= require jquery-tablesorter
-//= require bootstrap-sprockets
 //= require_tree .
 
 $(document).ready(function()

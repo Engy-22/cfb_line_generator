@@ -34,9 +34,7 @@ class User < ActiveRecord::Base
   def create_profiles
     @teams = Team.all
     @teams.each do |team|
-      unless team.name == "FCS Team"
-        Profile.create(user_id: self.id, team_id: team.id, hfa: 0, power_ranking: 0)
-      end
+      Profile.create(user_id: self.id, team_id: team.id, hfa: 0, power_ranking: 0)
     end
   end
 

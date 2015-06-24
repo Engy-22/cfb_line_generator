@@ -16,7 +16,6 @@ gem 'kaminari'
 gem 'thin'
 gem 'mechanize'
 gem "activeadmin", github: "activeadmin"
-gem "bootstrap-sass", "~> 3.3.4"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
