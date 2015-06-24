@@ -9,7 +9,7 @@
 </tr>
 </thead>
 <tbody>
-<% Profile.user_profiles(current_user).all(:order => 'hfa desc').map.with_index do |profile, index| %>
+<% Profile.user_profiles(current_user).order("hfa desc").map.with_index do |profile, index| %>
   <tr>
   <td><%= index + 1 %> </td>
   <td> <a href="<%=edit_team_profile_path(profile.team, profile)%>"> <%= profile.team.name %> </a> </td>

@@ -8,7 +8,7 @@
 </tr>
 </thead>
 <tbody>
-<% @teams.order('name').each do |team| %>
+<% @teams.each do |team| %>
   <tr>
   <% unless team.name == "FCS Team" %>
   <td> <a href="/teams/<%=team.id%>/profiles/<%=team.profiles.find_by(user_id: current_user.id).id%>/edit"> <%= team.name %> </a> </td>
