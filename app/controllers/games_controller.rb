@@ -23,13 +23,12 @@ class GamesController < ApplicationController
       end_date = Date.new(2016, 1, 19)
     else
       start_date = Date.new(2015, 9, 8) + (week_number - 2).weeks
-      end_date = start_date + 1.week
+      end_date = start_date + 6.days
     end
     start_date..end_date
   end
 
   def render_games_for_week(week_number)
-
     range = date_range_for_week(week_number)
     @games = Game.where(:date => range).order('date').order('visitor_rot')
     respond_to do |format|
