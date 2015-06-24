@@ -23,7 +23,7 @@ class SpreadsController < ApplicationController
   end
 
   def win_totals
-    @teams = Team.all.order("name")
+    @teams = Team.where.not(conference: nil).order("name")
     @spreads = Spread.all.where(user_id: current_user.id)
     @counter = 0
   end

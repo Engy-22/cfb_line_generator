@@ -10,7 +10,6 @@
 <tbody>
 <% @teams.each do |team| %>
   <tr>
-  <% unless team.name == "FCS Team" %>
   <td> <a href="/teams/<%=team.id%>/profiles/<%=team.profiles.find_by(user_id: current_user.id).id%>/edit"> <%= team.name %> </a> </td>
   <td> <%= team.conference %> </td>
   <td> <% team.games_as_visitor.each do |game| %>
@@ -29,7 +28,6 @@
        <% end %>
        <%= number_with_precision(@counter, :precision => 2)  %>
        <% @counter = 0 %>
-  <% end %>
 <% end %>
   </td>
   </tr>

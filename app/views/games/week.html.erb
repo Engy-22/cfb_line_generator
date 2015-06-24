@@ -32,16 +32,9 @@ Week
 <% end %>
 </td>
 <td>
-  <% if game.visitor.name == "FCS Team" %>
-    <%= game.visitor.name %>
-  <% else %>
     <a href="/teams/<%= game.visitor.id %>/profiles/<%= game.visitor.profiles.find_by(user_id: current_user.id).id %>/edit"> <%= game.visitor.name %> </a>
-  <% end %> <br/>
-  <% if game.home.name == "FCS Team" %>
-   <%= game.home.name %>
-  <% else %>
+ <br/>
     <a href="/teams/<%= game.home.id %>/profiles/<%= game.home.profiles.find_by(user_id: current_user.id).id %>/edit"> <%= game.home.name %> </a>
-  <% end %>
 </td>
 <td> <br/> <% if game.neutral == true %> x
      <% end %>
