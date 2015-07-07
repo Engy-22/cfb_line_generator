@@ -4,7 +4,8 @@
 <tr>
   <th> Team </th>
   <th> Conference </th>
-  <th> Season Win Totals </th>
+  <th> My Season Win Totals </th>
+  <th> PR Season Win Totals </th>
 </tr>
 </thead>
 <tbody>
@@ -28,9 +29,11 @@
        <% end %>
        <%= number_with_precision(@counter, :precision => 2)  %>
        <% @counter = 0 %>
-<% end %>
+
   </td>
+  <td> <%= team.pr_win_total current_user %> </td>
   </tr>
+<% end %>
 </tbody>
 </table>
 

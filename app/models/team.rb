@@ -38,4 +38,28 @@ class Team < ActiveRecord::Base
     (games_as_visitor + games_as_home).sort_by &:date
   end
 
+  def pr_win_total user
+    games = self.games_as_home + self.games_as_visitor
+    counter = 0
+    team_profile = Profile.find_by(team_id: self.id, user_id: user.id)
+    games.each do |game|
+      if game.visitor_id == self.id
+        opponent_profile = Profile.find_by(team_id: game.home_id, user_id: user.id)
+        unless game.neutral?
+          counter += Historical.spread_to_ml(opponent_profile.power_ranking + opponent_profile.hfa - team_profile.power_ranking)
+        else
+          counter += Historical.spread_to_ml(opponent_profile.power_ranking - team_profile.power_ranking)
+        end
+      else
+        opponent_profile = Profile.find_by(team_id: game.visitor_id, user_id: user.id)
+        unless game.neutral?
+          counter += Historical.spread_to_ml(opponent_profile.power_ranking - team_profile.hfa - team_profile.power_ranking)
+        else
+          counter += Historical.spread_to_ml(opponent_profile.power_ranking - team_profile.power_ranking)
+        end
+      end
+    end
+    counter.round(2)
+  end
+
 end
