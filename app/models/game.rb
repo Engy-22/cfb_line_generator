@@ -53,6 +53,32 @@ class Game < ActiveRecord::Base
    profiles.where("user_id = ? AND power_ranking > 0", user.id).any?
   end
 
+  def self.rotations url, start_date, end_date
+    agent = Mechanize.new
+    agent.user_agent_alias = 'Mac Safari'
+    stuff = agent.get(url).search(".viBodyBorderNorm")
+    data = stuff.map do |node|
+      node.children.map{|n| [n.text.strip] if n.elem? }.compact
+    end.compact
+    errors = []
+    data.each do |x|
+      str = (x.flatten[0].split(/\r?\n/)[17].gsub /\t/, '')[0...-1]
+      rot = str[0..2].to_i
+      vis_team = str[4..-1]
+      team = Team.find_by name: vis_team
+      unless team.nil?
+        game = Game.where(visitor_id: team.id, date: start_date..end_date).first
+        unless game.nil?
+          game.visitor_rot = rot
+          game.home_rot = rot + 1
+        else
+          errors << str
+        end
+      end
+    end
+  end
+
+
   private
 
   require 'csv'
