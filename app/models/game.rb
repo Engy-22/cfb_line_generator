@@ -76,6 +76,7 @@ class Game < ActiveRecord::Base
         end
       end
     end
+    errors
   end
 
 
