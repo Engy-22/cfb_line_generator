@@ -71,6 +71,7 @@ class Game < ActiveRecord::Base
         unless game.nil?
           game.visitor_rot = rot
           game.home_rot = rot + 1
+          game.save
         else
           errors << str
         end
