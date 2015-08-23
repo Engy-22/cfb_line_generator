@@ -66,6 +66,9 @@ class Game < ActiveRecord::Base
       rot = str[0..2].to_i
       vis_team = str[4..-1]
       team = Team.find_by name: vis_team
+      if team.nil?
+        team = Team.find_by alias: vis_team
+      end
       unless team.nil?
         game = Game.where(visitor_id: team.id, date: start_date..end_date).first
         unless game.nil?
@@ -75,6 +78,8 @@ class Game < ActiveRecord::Base
         else
           errors << str
         end
+      else
+        errors << str
       end
     end
     errors
