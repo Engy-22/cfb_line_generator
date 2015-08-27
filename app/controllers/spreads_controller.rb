@@ -28,6 +28,15 @@ class SpreadsController < ApplicationController
     @counter = 0
   end
 
+  def simulator
+    if params["/simulator"].present?
+      @results = Spread.simulate params["/simulator"]["game_one"], params["/simulator"]["game_two"], params["/simulator"]["game_three"],
+       params["/simulator"]["game_four"], params["/simulator"]["game_five"], params["/simulator"]["game_six"],
+       params["/simulator"]["game_seven"], params["/simulator"]["game_eight"], params["/simulator"]["game_nine"],
+       params["/simulator"]["game_ten"], params["/simulator"]["game_eleven"], params["/simulator"]["game_twelve"], params["/simulator"]["game_thirteen"]
+    end
+  end
+
 private
 
   def spread_params

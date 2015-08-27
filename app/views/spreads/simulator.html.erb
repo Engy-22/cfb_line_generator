@@ -1,0 +1,58 @@
+<div class="wrapper">
+<h2> Season Simulator </h2>
+
+<div class="left">
+  <h5> Enter win percentage between 0 & 100. </h5>
+  <%= form_for simulator_path, method: :get do |f| %>
+    <%= f.label :game_one, "Game One" %>
+    <%= f.number_field :game_one, step: "any" %> </br>
+    <%= f.label :game_two, "Game Two" %>
+    <%= f.number_field :game_two, step: "any" %> </br>
+    <%= f.label :game_three, "Game Three" %>
+    <%= f.number_field :game_three, step: "any" %> </br>
+    <%= f.label :game_four, "Game Four" %>
+    <%= f.number_field :game_four, step: "any" %> </br>
+    <%= f.label :game_five, "Game Five" %>
+    <%= f.number_field :game_five, step: "any" %> </br>
+    <%= f.label :game_six, "Game Six" %>
+    <%= f.number_field :game_six, step: "any" %> </br>
+    <%= f.label :game_seven, "Game Seven" %>
+    <%= f.number_field :game_seven, step: "any" %> </br>
+    <%= f.label :game_eight, "Game Eight" %>
+    <%= f.number_field :game_eight, step: "any" %> </br>
+    <%= f.label :game_nine, "Game Nine" %>
+    <%= f.number_field :game_nine, step: "any" %> </br>
+    <%= f.label :game_ten, "Game Ten" %>
+    <%= f.number_field :game_ten, step: "any" %> </br>
+    <%= f.label :game_eleven, "Game Eleven" %>
+    <%= f.number_field :game_eleven, step: "any" %> </br>
+    <%= f.label :game_twelve, "Game Twelve" %>
+    <%= f.number_field :game_twelve, step: "any" %> </br>
+    <%= f.label :game_thirteen, "Game Thirteen" %>
+    <%= f.number_field :game_thirteen, step: "any" %> </br>
+    <%= f.submit "Submit" %>
+  <% end %>
+</div>
+<% if @results %>
+  <div class="right">
+  <table>
+  <thead>
+  <tr>
+    <th> # of Wins </th>
+    <th> Percentage </th>
+  </tr>
+  </thead>
+  <tbody>
+    <% (0..13).each do |n| %>
+      <tr>
+        <td><%= n %></td>
+        <td><%= number_to_percentage(@results[n] / 100.0) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  </table>
+
+  </div>
+<% end %>
+
+</div>
