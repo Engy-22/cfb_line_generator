@@ -93,7 +93,6 @@ class Game < ActiveRecord::Base
     end
     notfound = []
     data.each do |x|
-      binding.pry
       team = Team.find_by(name: (x[7][0])[0..-8].underscore.split('_').first.titleize)
       if team.blank?
         team = Team.find_by(name: (x[7][0])[0..-8].underscore.split('_').first.titleize.split(")").last[1..-1])
