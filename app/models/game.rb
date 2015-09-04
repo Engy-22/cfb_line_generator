@@ -85,6 +85,31 @@ class Game < ActiveRecord::Base
     errors
   end
 
+  def self.results  #This needs to be tested once games complete.
+    agent = Mechanize.new
+    stuff = agent.get("http://www.sportsbookreview.com/betting-odds/college-football/").search(".status-complete")
+    data = stuff.map do |node|
+      node.children.map{|n| [n.text.strip] if n.elem? }.compact
+    end
+    notfound = []
+    data.each do |x|
+      team = Team.find_by(name: (x[7][0])[0..-8].underscore.split('_').first.titleize).id
+      if team.blank?
+        team = Team.find_by(alias: (x[7][0])[0..-8].underscore.split('_').first.titleize).id
+      end
+      unless team.nil?
+        game = Game.find_by(visitor_id: team, date: Date.today - 1.day)
+        unless game.blank?
+          game.data = x[11][0]
+          game.save
+        end
+      else
+        notfound << (x[7][0])[0..-8].underscore.split('_').first.titleize
+      end
+    end
+    notfound
+  end
+
 
   private
 
