@@ -99,10 +99,10 @@ class Game < ActiveRecord::Base
         team = Team.find_by(name: (x[7][0])[0..-8].underscore.split('_').first.titleize.split(")").last[1..-1])
       end
       if team.blank?
-        team = Team.find_by(alias: (x[7][0])[0..-8].underscore.split('_').first.titleize)
+        team = Team.find_by(sbr_alias: (x[7][0])[0..-8].underscore.split('_').first.titleize)
       end
       if team.blank?
-        team = Team.find_by(alias: (x[7][0])[0..-8].underscore.split('_').first.titleize.split(")").last[1..-1])
+        team = Team.find_by(sbr_alias: (x[7][0])[0..-8].underscore.split('_').first.titleize.split(")").last[1..-1])
       end
       unless team.nil?
         game = Game.find_by(visitor_id: team.id, date: Date.today - 1.day)
