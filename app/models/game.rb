@@ -91,7 +91,8 @@ class Game < ActiveRecord::Base
     data = stuff.map do |node|
       node.children.map{|n| [n.text.strip] if n.elem? }.compact
     end
-    notfound = []
+    not_found = []
+    no_game = []
     data.each do |x|
       team = Team.find_by(name: (x[7][0])[0..-8].underscore.split('_').first.titleize)
       if team.blank?
@@ -108,12 +109,14 @@ class Game < ActiveRecord::Base
         unless game.blank?
           game.data = x[11][0]
           game.save
+        else
+          no_game << (x[7][0])[0..-8].underscore.split('_').first.titleize
         end
       else
-        notfound << (x[7][0])[0..-8].underscore.split('_').first.titleize
+        not_found << (x[7][0])[0..-8].underscore.split('_').first.titleize
       end
     end
-    notfound
+    return not_found + no_game
   end
 
 
