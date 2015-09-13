@@ -69,8 +69,6 @@ h2 {
   vertical-align: top;
 }
 
-
-
-a, a:hover, a:active, a:visited{
-  color:blue;
+a:-webkit-any-link{
+text-decoration:none !important;
 }
