@@ -10,7 +10,6 @@
 </thead>
 <tbody>
   <% @teams.each do |team| %>
-    <% unless team.id == 269 %>
   <tr>
     <td> <%= team.name %> </td>
     <td> <%= team.conference %> </td>
@@ -20,7 +19,6 @@
             <% end %>
         <% end %> </td>
     </tr>
-    <% end %>
   <% end %>
 </tbody>
 </table>

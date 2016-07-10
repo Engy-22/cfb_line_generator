@@ -14,12 +14,12 @@ class GamesController < ApplicationController
     start_date = end_date = nil
     if week_number == 1
       start_date = Date.new(2016, 8, 24)
-      end_date = Date.new(2015, 9, 5)
+      end_date = Date.new(2016, 9, 5)
     elsif week_number == 14
-      start_date = Date.new(2015, 11, 28)
-      end_date = Date.new(2015, 12, 10)
+      start_date = Date.new(2016, 11, 28)
+      end_date = Date.new(2016, 12, 10)
     elsif week_number == 15
-      start_date = Date.new(2015, 12, 11)
+      start_date = Date.new(2016, 12, 11)
       end_date = Date.new(2016, 1, 19)
     else
       start_date = Date.new(2015, 9, 6) + (week_number - 2).weeks
