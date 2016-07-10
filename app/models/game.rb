@@ -30,7 +30,7 @@ class Game < ActiveRecord::Base
     manual = []
     day = ""
     data = data[0]
-    (4..950).each do |n|
+    (2..1162).each do |n|
       if data[n][0].split(",")[0] == "Saturday" || data[n][0].split(",")[0] == "Sunday" || data[n][0].split(",")[0] == "Monday" || data[n][0].split(",")[0] == "Tuesday" || data[n][0].split(",")[0] == "Wednesday" || data[n][0].split(",")[0] == "Thursday" || data[n][0].split(",")[0] == "Friday"
         day = data[n][0]
       elsif data[n][0].include? "game"
