@@ -22,7 +22,7 @@ class GamesController < ApplicationController
       start_date = Date.new(2016, 12, 11)
       end_date = Date.new(2016, 1, 19)
     else
-      start_date = Date.new(2015, 9, 6) + (week_number - 2).weeks
+      start_date = Date.new(2016, 9, 6) + (week_number - 2).weeks
       end_date = start_date + 6.days
     end
     start_date..end_date
