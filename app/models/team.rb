@@ -10,7 +10,7 @@
 #
 
 class Team < ActiveRecord::Base
-  has_many :profiles
+  has_many :profiles, dependent: :destroy
   has_many :games_as_visitor, class_name: "Game", foreign_key: "visitor_id"
   has_many :games_as_home, class_name: "Game", foreign_key: "home_id"
 
