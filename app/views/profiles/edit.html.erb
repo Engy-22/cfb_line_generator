@@ -1,5 +1,4 @@
 <br/>
-
 <h3> <%= @team.name %> </h3>
 <br/>
 <%= form_for [@team, @profile] do |f|  %>
@@ -23,170 +22,100 @@
 
 <br/>
 <table id="GameTable" class="tablesorter">
-<thead>
-<tr>
-  <th> Date </th>
-  <th> Rot # </th>
-  <th> Teams </th>
-  <th> Neutral? </th>
-  <th> PRs </th>
-  <th> PR Spread </th>
-  <th> My Spread </th>
-  <th> My Total </th>
-  <th></th>
-  <th> Win % </th>
-</tr>
-</thead>
-<tbody>
-<% @team.games_as_visitor.each do |game| %>
-<tr>
-<td> <%= game.date %> </td>
-<td>
-<% unless game.visitor_rot == nil %>
-  <%= game.visitor_rot %> <br/>
-  <%= game.home_rot %>
-<% end %>
-</td>
-<td>
-<%= game.visitor.name %> <br/>
-<%= game.home.name %>
-</td>
-<td> <br/> <% if game.neutral == true %> x
-     <% end %>
-</td>
-<td>
-<% if game.visitor.has_profile?(current_user) and game.home.has_profile?(current_user) %>
-  <%= game.visitor.profiles.find_by(user_id: current_user.id).power_ranking %> <br/>
-  <%= game.home.profiles.find_by(user_id: current_user.id).power_ranking %>
-<% end %>
-</td>
-<td>
-</br>
-<% if game.visitor.has_profile?(current_user) and game.home.has_profile?(current_user) %>
-  <%= get_spread(game) %>
-<% end %>
-</td>
-<% if game.has_spread?(current_user) %>
-<td>
-  <br/>
- <span class="rest-in-place" data-url="/spreads/<%= game.spreads.find_by(user_id: current_user.id).id %>" data-object="spread" data-attribute="proj_spread">
- <% unless game.spreads.find_by(user_id: current_user.id).proj_spread == nil %>
-  <%= game.spreads.find_by(user_id: current_user.id).proj_spread %>
- <% else %>
-  N/A
- <% end %> </span>
-</td>
-<td>
-  <br/>
-<span class="rest-in-place" data-url="/spreads/<%= game.spreads.find_by(user_id: current_user.id).id %>" data-object="spread" data-attribute="proj_total">
-<% unless game.spreads.find_by(user_id: current_user.id).proj_total == nil %>
-  <%= game.spreads.find_by(user_id: current_user.id).proj_total %>
-<% else %>
-  N/A
-<% end %> </span>
-</td>
-<% else %>
-<td>
-  <%= form_for game.spreads.build do |f| %>
-    <%= f.text_field :proj_spread %>
-</td>
-<td>
-    <%= f.text_field :proj_total %>
-</td>
-<td>
-    <%= f.hidden_field :game_id, value: game.id %>
-    <%= f.submit "Update" %>
-</td>
-  <% end %>
-
-<% end %>
-<td></td>
-<td>
-  <% if game.has_spread?(current_user) %>
-    <br/>
-    <% unless game.spreads.find_by(user_id: current_user.id).proj_spread == nil %>
-      <%= number_with_precision(1 - game.spreads.find_by(user_id: current_user.id).home_win_percentage, :precision => 3) %>
-       <% @counter += 1 - game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
+  <thead>
+    <tr>
+      <th> Date </th>
+      <th> Rot # </th>
+      <th> Teams </th>
+      <th> Neutral? </th>
+      <th> PRs </th>
+      <th> PR Spread </th>
+      <th> My Spread </th>
+      <th> My Total </th>
+      <th></th>
+      <th> Win % </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @team.games.each do |game| %>
+    <tr>
+      <td> <%= game.date %> </td>
+      <td>
+        <% unless game.visitor_rot.nil? %>
+          <%= game.visitor_rot %> <br/>
+          <%= game.home_rot %>
+        <% end %>
+      </td>
+      <td>
+        <%= game.visitor.name %> <br/>
+        <%= game.home.name %>
+      </td>
+      <td>
+        <br/>
+        <% if game.neutral %>
+          x
+        <% end %>
+      </td>
+      <td>
+        <% if game.visitor.has_profile?(current_user) && game.home.has_profile?(current_user) %>
+          <%= game.visitor.profiles.find_by(user_id: current_user.id).power_ranking %> <br/>
+          <%= game.home.profiles.find_by(user_id: current_user.id).power_ranking %>
+        <% end %>
+      </td>
+      <td>
+        </br>
+        <% if game.visitor.has_profile?(current_user) && game.home.has_profile?(current_user) %>
+          <%= get_spread(game) %>
+        <% end %>
+      </td>
+      <% if game.has_spread?(current_user) %>
+        <td>
+          <br/>
+          <span class="rest-in-place" data-url="/spreads/<%= game.spreads.find_by(user_id: current_user.id).id %>" data-object="spread" data-attribute="proj_spread">
+            <% unless game.spreads.find_by(user_id: current_user.id).proj_spread.nil? %>
+              <%= game.spreads.find_by(user_id: current_user.id).proj_spread %>
+            <% else %>
+              N/A
+            <% end %>
+          </span>
+        </td>
+        <td>
+          <br/>
+          <span class="rest-in-place" data-url="/spreads/<%= game.spreads.find_by(user_id: current_user.id).id %>" data-object="spread" data-attribute="proj_total">
+            <% unless game.spreads.find_by(user_id: current_user.id).proj_total.nil? %>
+              <%= game.spreads.find_by(user_id: current_user.id).proj_total %>
+            <% else %>
+              N/A
+            <% end %>
+          </span>
+        </td>
+      <% else %>
+        <%= form_for game.spreads.build do |f| %>
+          <td>
+            <%= f.text_field :proj_spread %>
+          </td>
+          <td>
+            <%= f.text_field :proj_total %>
+          </td>
+          <td>
+            <%= f.hidden_field :game_id, value: game.id %>
+            <%= f.submit "Update" %>
+          </td>
+        <% end %>
+      <% end %>
+      <td></td>
+      <td>
+        <% if game.has_spread?(current_user) %>
+          <br/>
+          <% unless game.spreads.find_by(user_id: current_user.id).proj_spread.nil? %>
+            <%= number_with_precision(1 - game.spreads.find_by(user_id: current_user.id).home_win_percentage, :precision => 3) %>
+            <% @counter += 1 - game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
     <% end %>
-  <% end %>
-  </td>
-</tr>
-<% end %>
-<% @team.games_as_home.each do |game| %>
-<tr>
-<td>  <%= game.date %> </td>
-<td>
-<% unless game.visitor_rot == nil %>
-  <%= game.visitor_rot %> <br/>
-  <%= game.home_rot %>
-<% end %>
-</td>
-<td>
-<%= game.visitor.name %> <br/>
-<%= game.home.name %>
-</td>
-<td> <br/> <% if game.neutral == true %> x
-     <% end %>
-</td>
-<td>
-<% if game.visitor.has_profile?(current_user) and game.home.has_profile?(current_user) %>
-  <%= game.visitor.profiles.find_by(user_id: current_user.id).power_ranking %> <br/>
-  <%= game.home.profiles.find_by(user_id: current_user.id).power_ranking %>
-<% end %>
-</td>
-<td>
-</br>
-<% if game.visitor.has_profile?(current_user) and game.home.has_profile?(current_user) %>
-  <%= get_spread(game) %>
-<% end %>
-</td>
-<% if game.has_spread?(current_user) %>
-<td>
-  <br/>
- <span class="rest-in-place" data-url="/spreads/<%= game.spreads.find_by(user_id: current_user.id).id %>" data-object="spread" data-attribute="proj_spread">
- <% unless game.spreads.find_by(user_id: current_user.id).proj_spread == nil %>
-  <%= game.spreads.find_by(user_id: current_user.id).proj_spread %>
- <% else %>
-  N/A
- <% end %> </span>
-</td>
-<td>
-  <br/>
-<span class="rest-in-place" data-url="/spreads/<%= game.spreads.find_by(user_id: current_user.id).id %>" data-object="spread" data-attribute="proj_total">
-<% unless game.spreads.find_by(user_id: current_user.id).proj_total == nil %>
-  <%= game.spreads.find_by(user_id: current_user.id).proj_total %>
-<% else %>
-  N/A
-<% end %> </span>
-</td>
-<% else %>
-<td>
-  <%= form_for game.spreads.build do |f| %>
-    <%= f.text_field :proj_spread %>
-</td>
-<td>
-    <%= f.text_field :proj_total %>
-</td>
-<td>
-    <%= f.hidden_field :game_id, value: game.id %>
-    <%= f.submit "Update" %>
-</td>
-  <% end %>
-  </td>
-<% end %>
-<td></td>
-<td>
-<% if game.has_spread?(current_user) %>
-    <br/>
-    <% unless game.spreads.find_by(user_id: current_user.id).proj_spread == nil %>
-      <%= game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
-        <% @counter += game.spreads.find_by(user_id: current_user.id).home_win_percentage %>
-    <% end %>
-  <% end %>
-</td>
-</tr>
-<% end %>
-</tbody>
+  </tbody>
 </table>
 
 <strong> Season Wins: <%= number_with_precision(@counter, :precision => 2) %> </strong>

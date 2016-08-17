@@ -1,58 +1,57 @@
 <div class="wrapper">
-<h2> Season Simulator </h2>
+  <h2> Season Simulator </h2>
 
-<div class="left">
-  <h5> Enter win percentage between 0 & 100. </h5>
-  <%= form_tag simulator_path, method: :get do %>
-    <%= label_tag :game_one, "Game One" %>
-    <%= number_field_tag :game_one, params[:game_one], step: "any" %> </br>
-    <%= label_tag :game_two, "Game Two" %>
-    <%= number_field_tag :game_two, params[:game_two], step: "any" %> </br>
-    <%= label_tag :game_three, "Game Three" %>
-    <%= number_field_tag :game_three, params[:game_three], step: "any" %> </br>
-    <%= label_tag :game_four, "Game Four" %>
-    <%= number_field_tag :game_four, params[:game_four], step: "any" %> </br>
-    <%= label_tag :game_five, "Game Five" %>
-    <%= number_field_tag :game_five, params[:game_five], step: "any" %> </br>
-    <%= label_tag :game_six, "Game Six" %>
-    <%= number_field_tag :game_six, params[:game_six], step: "any" %> </br>
-    <%= label_tag :game_seven, "Game Seven" %>
-    <%= number_field_tag :game_seven, params[:game_seven], step: "any" %> </br>
-    <%= label_tag :game_eight, "Game Eight" %>
-    <%= number_field_tag :game_eight, params[:game_eight], step: "any" %> </br>
-    <%= label_tag :game_nine, "Game Nine" %>
-    <%= number_field_tag :game_nine, params[:game_nine], step: "any" %> </br>
-    <%= label_tag :game_ten, "Game Ten" %>
-    <%= number_field_tag :game_ten, params[:game_ten], step: "any" %> </br>
-    <%= label_tag :game_eleven, "Game Eleven" %>
-    <%= number_field_tag :game_eleven, params[:game_eleven], step: "any" %> </br>
-    <%= label_tag :game_twelve, "Game Twelve" %>
-    <%= number_field_tag :game_twelve, params[:game_twelve], step: "any" %> </br>
-    <%= label_tag :game_thirteen, "Game Thirteen" %>
-    <%= number_field_tag :game_thirteen, params[:game_thirteen], step: "any" %> </br>
-    <%= submit_tag "Submit" %>
-  <% end %>
-</div>
-<% if @results %>
-  <div class="right">
-  <table>
-  <thead>
-  <tr>
-    <th> # of Wins </th>
-    <th> Percentage </th>
-  </tr>
-  </thead>
-  <tbody>
-    <% (0..13).each do |n| %>
-      <tr>
-        <td><%= n %></td>
-        <td><%= number_to_percentage(@results[n] / 100.0) %></td>
-      </tr>
+  <div class="left">
+    <h5> Enter win percentage between 0 & 100. </h5>
+    <%= form_tag simulator_path, method: :get do %>
+      <%= label_tag :game_one, "Game One" %>
+      <%= number_field_tag :game_one, params[:game_one], step: "any" %> </br>
+      <%= label_tag :game_two, "Game Two" %>
+      <%= number_field_tag :game_two, params[:game_two], step: "any" %> </br>
+      <%= label_tag :game_three, "Game Three" %>
+      <%= number_field_tag :game_three, params[:game_three], step: "any" %> </br>
+      <%= label_tag :game_four, "Game Four" %>
+      <%= number_field_tag :game_four, params[:game_four], step: "any" %> </br>
+      <%= label_tag :game_five, "Game Five" %>
+      <%= number_field_tag :game_five, params[:game_five], step: "any" %> </br>
+      <%= label_tag :game_six, "Game Six" %>
+      <%= number_field_tag :game_six, params[:game_six], step: "any" %> </br>
+      <%= label_tag :game_seven, "Game Seven" %>
+      <%= number_field_tag :game_seven, params[:game_seven], step: "any" %> </br>
+      <%= label_tag :game_eight, "Game Eight" %>
+      <%= number_field_tag :game_eight, params[:game_eight], step: "any" %> </br>
+      <%= label_tag :game_nine, "Game Nine" %>
+      <%= number_field_tag :game_nine, params[:game_nine], step: "any" %> </br>
+      <%= label_tag :game_ten, "Game Ten" %>
+      <%= number_field_tag :game_ten, params[:game_ten], step: "any" %> </br>
+      <%= label_tag :game_eleven, "Game Eleven" %>
+      <%= number_field_tag :game_eleven, params[:game_eleven], step: "any" %> </br>
+      <%= label_tag :game_twelve, "Game Twelve" %>
+      <%= number_field_tag :game_twelve, params[:game_twelve], step: "any" %> </br>
+      <%= label_tag :game_thirteen, "Game Thirteen" %>
+      <%= number_field_tag :game_thirteen, params[:game_thirteen], step: "any" %> </br>
+      <%= submit_tag "Submit" %>
     <% end %>
-  </tbody>
-  </table>
-
   </div>
-<% end %>
+  <% if @results %>
+    <div class="right">
+    <table>
+      <thead>
+        <tr>
+          <th> # of Wins </th>
+          <th> Percentage </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% (0..13).each do |n| %>
+          <tr>
+            <td><%= n %></td>
+            <td><%= number_to_percentage(@results[n] / 100.0) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+  <% end %>
 
 </div>

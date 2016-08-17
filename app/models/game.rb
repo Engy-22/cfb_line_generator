@@ -57,7 +57,7 @@ class Game < ActiveRecord::Base
   end
 
   def has_profile?(user)
-   profiles.where("user_id = ? AND power_ranking > 0", user.id).any?
+    profiles.where("user_id = ? AND power_ranking > 0", user.id).any?
   end
 
   def self.rotations url, start_date, end_date

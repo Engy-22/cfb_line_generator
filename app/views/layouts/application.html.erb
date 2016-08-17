@@ -11,21 +11,21 @@
 <nav>
 
   <% if current_user %>
-  <%= link_to "Home", root_path %> |
-  <%= link_to "About", about_path %> |
-  <%= link_to "Power Rankings", pr_path %> |
-  <%= link_to "HFAs", hfa_path %> |
-  <%= link_to "Season Win Totals", win_totals_path %> |
-  <%= link_to "Season Simulator", simulator_path %> |
-  <%= link_to "Schedule", "/weeks/1" %> |
-  <%= link_to "Spread/ML Converter", spread_to_ml_path %> |
-  <%= link_to "Sign Out", destroy_user_session_path %>
-<% else %>
-  <%= link_to "Sign In", new_user_session_path %> |
-  <%= link_to "Sign Up", new_user_registration_path %> |
-  <%= link_to "Spread/ML Converter", spread_to_ml_path %> |
-  <%= link_to "About", about_path %>
-<% end %>
+    <%= link_to "Home", root_path %> |
+    <%= link_to "About", about_path %> |
+    <%= link_to "Power Rankings", pr_path %> |
+    <%= link_to "HFAs", hfa_path %> |
+    <%= link_to "Season Win Totals", win_totals_path %> |
+    <%= link_to "Season Simulator", simulator_path %> |
+    <%= link_to "Schedule", "/weeks/1" %> |
+    <%= link_to "Spread/ML Converter", spread_to_ml_path %> |
+    <%= link_to "Sign Out", destroy_user_session_path %>
+  <% else %>
+    <%= link_to "Sign In", new_user_session_path %> |
+    <%= link_to "Sign Up", new_user_registration_path %> |
+    <%= link_to "Spread/ML Converter", spread_to_ml_path %> |
+    <%= link_to "About", about_path %>
+  <% end %>
 
 </nav>
 
@@ -40,6 +40,7 @@
       <%= notice %>
     </div>
   <% end %>
+
 <%= yield %>
 
 </body>

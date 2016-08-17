@@ -3,7 +3,7 @@ class SpreadsController < ApplicationController
   def create
     @spread = Spread.new(spread_params)
     @spread.user = current_user
-    if @spread.proj_spread != nil
+    if !@spread.proj_spread.nil?
       @spread.home_win_percentage = Historical.spread_to_ml(@spread.proj_spread)
     end
     @spread.save
@@ -24,15 +24,15 @@ class SpreadsController < ApplicationController
 
   def win_totals
     @teams = Team.where.not(conference: nil).order("name")
-    @spreads = Spread.all.where(user_id: current_user.id)
+    @spreads = Spread.where(user_id: current_user.id)
     @counter = 0
   end
 
   def simulator
     if params["game_one"].present?
       @results = Spread.simulate params["game_one"], params["game_two"], params["game_three"],
-       params["game_four"], params["game_five"], params["game_six"], params["game_seven"],
-       params["game_eight"], params["game_nine"], params["game_ten"], params["game_eleven"], params["game_twelve"], params["game_thirteen"]
+      params["game_four"], params["game_five"], params["game_six"], params["game_seven"],
+      params["game_eight"], params["game_nine"], params["game_ten"], params["game_eleven"], params["game_twelve"], params["game_thirteen"]
     end
   end
 
