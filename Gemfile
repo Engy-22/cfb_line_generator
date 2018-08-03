@@ -12,7 +12,7 @@ gem 'devise'
 gem 'rest_in_place'
 gem 'jquery-tablesorter'
 gem 'kaminari'
-gem 'thin'
+#gem 'thin'
 gem 'mechanize'
 gem "activeadmin"
 
