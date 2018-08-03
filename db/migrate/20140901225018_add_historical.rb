@@ -1,4 +1,4 @@
-class AddHistorical < ActiveRecord::Migration
+class AddHistorical < ActiveRecord::Migration[4.2]
   def change
 
     create_table :historicals do |t|

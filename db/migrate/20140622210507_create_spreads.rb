@@ -1,4 +1,4 @@
-class CreateSpreads < ActiveRecord::Migration
+class CreateSpreads < ActiveRecord::Migration[4.2]
   def change
     create_table :spreads do |t|
       t.integer :game_id

@@ -1,23 +1,18 @@
-development:
+default: &default
   adapter: postgresql
-  encoding: utf8
-  database: cfb_line_generator_development
+  encoding: unicode
   pool: 5
-  username:
-  password:
+  host: localhost
+
+development:
+  <<: *default
+  database: cfb_line_generator_development
 
 test: &TEST
-  adapter: postgresql
-  encoding: utf8
+  <<: *default
   database: cfb_line_generator_test
-  pool: 5
-  username:
-  password:
 
 production:
   adapter: postgresql
   encoding: utf8
   database: cfb_line_generator_production
-  pool: 5
-  username:
-  password:
