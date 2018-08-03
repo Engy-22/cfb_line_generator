@@ -1,14 +1,13 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
-
-gem 'rails'
+gem 'rails'#, '~> 5.1.1'
 gem 'pg'
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder'
+gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'rest_in_place'
 gem 'jquery-tablesorter'
@@ -23,15 +22,12 @@ group :doc do
 end
 
 group :development, :test do
-  gem "annotate", "~> 2.6.10"
-  gem "dotenv-rails"
-  gem "quiet_assets", "~> 1.1"
-  gem "pry-rails"
-  gem "better_errors", "~> 2.1"
+  gem "annotate"
+  gem "pry-byebug"
+  gem "better_errors"
   gem "binding_of_caller"
   gem "rspec-rails"
   gem "capybara"
-  gem "factory_girl"
+  gem "factory_girl_rails"
   gem "database_cleaner"
-  gem "launchy"
 end
