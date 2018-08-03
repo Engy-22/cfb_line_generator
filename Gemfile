@@ -1,21 +1,21 @@
 source 'https://rubygems.org'
-ruby '2.1.5'
+ruby '2.5.1'
 
-gem 'rails', '4.2.0'
+gem 'rails'
 gem 'pg'
-gem 'sass-rails', '~> 4.0.2'
+gem 'sass-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 gem 'devise'
 gem 'rest_in_place'
 gem 'jquery-tablesorter'
 gem 'kaminari'
 gem 'thin'
 gem 'mechanize'
-gem "activeadmin", github: "activeadmin"
+gem "activeadmin"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
